@@ -18,7 +18,7 @@ const Index = () => {
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="Website Name" value={formData.name} onChange={handleChange}/>
         <input type="text" name="link" placeholder="http://" value={formData.link} onChange={handleChange}/>
-        <input style={{color:"black", background:"gray"}} type="submit" value="Add Bookmark!" />
+        <input type="submit" value="Add Bookmark!" />
       </form>
     </div>
   );
