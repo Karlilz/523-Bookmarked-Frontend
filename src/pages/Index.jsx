@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 const Index = () => {
   const [formData, setFormData] = useState({ name: '', link: '' });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
