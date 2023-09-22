@@ -5,7 +5,7 @@ const Show = () => {
     const bookmark = useLoaderData()
   return (
     <div>
-        <h1 className="text-xl">{bookmark.title}</h1>
+        <h1>{bookmark.title}</h1>
         <h2>{bookmark.url}</h2>
     </div>
   )
