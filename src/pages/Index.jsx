@@ -14,7 +14,7 @@ const Index = () => {
 
   return (
     <div>
-      <h3>Add a New Bookmark</h3>
+      <h3>Bookmark a Helpful Coding Website</h3>
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="Website Name" value={formData.name} onChange={handleChange}/>
         <input type="text" name="link" placeholder="http://" value={formData.link} onChange={handleChange}/>
