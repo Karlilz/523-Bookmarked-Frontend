@@ -1,8 +1,13 @@
 import React from 'react'
+import { useLoaderData } from 'react-router-dom'
 
 const Show = () => {
+    const bookmark = useLoaderData()
   return (
-    <div>Show</div>
+    <div>
+        <h1 className="text-xl">{bookmark.title}</h1>
+        <h2>{bookmark.url}</h2>
+    </div>
   )
 }
 

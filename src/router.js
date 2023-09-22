@@ -14,7 +14,7 @@ import {createBrowserRouter, createRoutesFromElements, Route,} from "react-route
       <Route path=":id/edit" element={<Update/>} loader={showLoader}/>
       <Route path="create" action={createAction}/>
       <Route path="update/:id" action={updateAction}/>
-      <Route path="delete/:id" action={deleteAction}  />
+      <Route path="delete/:id" action={deleteAction}/>
     </Route>)
   )
 

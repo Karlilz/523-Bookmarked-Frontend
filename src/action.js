@@ -1,6 +1,5 @@
 import { redirect } from "react-router-dom";
 
-// our app will connect to the deployed url instead of localhost
 const URL = 'https://five23-bookmarked-backened.onrender.com/'
 
 
@@ -13,7 +12,7 @@ export const createAction = async ({request}) => {
         url: formData.get('url'),
     };
 
-// SEND NEW PERSON TO OUR API
+// SEND NEW BOOKMARK TO OUR API
 await fetch(URL + '/bookmark', {
     method: "post",
     headers: {
@@ -22,7 +21,6 @@ await fetch(URL + '/bookmark', {
     body: JSON.stringify(bookmark),
   })
 
-// REDIRECT TO INDEX
    return redirect("/")
 }
 
