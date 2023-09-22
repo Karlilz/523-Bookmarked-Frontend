@@ -19,7 +19,7 @@ const Index = () => {
         <input
           type="text" name="name" placeholder="Website Name" value={formData.name} onChange={handleChange}
           style={{
-            width: '25%',
+            width: '15%',
             padding: '10px',
             marginBottom: '15px',
             border: '1px solid #ccc',
@@ -31,7 +31,7 @@ const Index = () => {
         <input
           type="text" name="link" placeholder="http://" value={formData.link} onChange={handleChange}
           style={{
-            width: '25%',
+            width: '15%',
             padding: '10px',
             marginBottom: '15px',
             border: '1px solid #ccc',
