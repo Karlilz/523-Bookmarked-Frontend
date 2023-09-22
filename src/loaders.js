@@ -1,4 +1,4 @@
-const URL = "ADD OUR RENDERED URL"
+const URL = 'https://five23-bookmarked-backened.onrender.com/'
 
 // BOOKMARK LOADER - INDEX
 export const bookmarkLoader = async () => {
