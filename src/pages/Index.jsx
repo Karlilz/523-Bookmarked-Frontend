@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,Form } from 'react';
 
 const Index = () => {
   const [formData, setFormData] = useState({ name: '', link: '' });
@@ -15,7 +15,7 @@ const Index = () => {
   return (
     <div>
       <h3 style={{ textDecoration: 'underline', fontSize:'25px'}}>Bookmark a Helpful Coding Website</h3>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <input
           type="text" name="name" placeholder="Website Name" value={formData.name} onChange={handleChange}
           style={{
@@ -52,7 +52,7 @@ const Index = () => {
             fontSize: '16px',
           }}
         />
-      </form>
+      </Form>
     </div>
   );
 };
