@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import {Form } from 'react-router-dom'
+import { Form } from 'react-router-dom';
 
 const Index = () => {
-  const [formData, setFormData] = useState({ name: '', link: '' });
+  const [formData, setFormData] = useState({ title: '', url: '' });
   const [bookmarks, setBookmarks] = useState([]);
+  const [editIndex, setEditIndex] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
 
     try {
-      const response = await fetch('https://five23-bookmarked-backened.onrender.com', {
+      const response = await fetch('https://five23-bookmarked-backened.onrender.com/bookmark', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,13 +20,28 @@ const Index = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setBookmarks([...bookmarks, data]);
-        setFormData({ name: '', link: '' });
+        setFormData({ title: '', url: '' });
       }
     } catch (error) {
       console.error('Error:', error);
     }
+  };
+
+  const handleEdit = (index) => {
+    setEditIndex(index);
+  };
+
+  const handleSave = (index, editedBookmark) => {
+    const updatedBookmarks = [...bookmarks];
+    updatedBookmarks[index] = editedBookmark;
+    setBookmarks(updatedBookmarks);
+    setEditIndex(null);
+  };
+
+  const handleDelete = (index) => {
+    const updatedBookmarks = bookmarks.filter((_, i) => i !== index);
+    setBookmarks(updatedBookmarks);
   };
 
   const handleChange = (event) => {
@@ -36,28 +51,43 @@ const Index = () => {
 
   return (
     <div>
-      <h3 style={{ textDecoration: 'underline', fontSize: '25px', fontStyle: 'italic' }}>
+      <h3 style={{ textDecoration: 'underline', fontSize: '25px'}}>
         Bookmark a Helpful Coding Website
       </h3>
       <Form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Website Name" value={formData.name} onChange={handleChange}
+        <input type="text" name="title" placeholder="Website Name" value={formData.title} onChange={handleChange}
+          style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px',fontSize: '16px', color: '#333'}}/>
+
+        <input type="text" name="url" placeholder="http://" value={formData.url} onChange={handleChange}
           style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
 
-        <input type="text" name="link" placeholder="http://" value={formData.link} onChange={handleChange}
-          style={{width: '15%', padding: '10px',marginBottom: '15px', border: '1px solid #ccc',borderRadius: '5px',fontSize: '16px', color: '#333'}}/>
-
         <input type="submit" value="Add Bookmark!"
-          style={{width: '15%',padding: '10px',backgroundColor: '#71b8e4',color: 'black',border: 'none', borderRadius: '5px',fontSize: '16px'}}/>
+          style={{width: '15%', padding: '10px', backgroundColor: '#71b8e4', color: 'black', border: 'none',borderRadius: '5px', fontSize: '16px'}}/>
       </Form>
 
       <div>
-        <h3>Your Bookmarks</h3>
-        <ul>
+        <ul style={{ listStyleType: 'none', padding: 0, fontSize: '25px' }}>
           {bookmarks.map((bookmark, index) => (
             <li key={index}>
-              <a href={bookmark.link}>
-                {bookmark.name}
-              </a>
+              {editIndex === index ? (
+                <div>
+                  <input type="text" name="title" value={bookmark.title} onChange={(e) =>
+                      handleSave(index, { ...bookmark, title: e.target.value })}/>
+
+                  <input type="text" name="url" value={bookmark.url} onChange={(e) =>
+                      handleSave(index, { ...bookmark, url: e.target.value })}/>
+                      
+                  <button onClick={() => handleSave(index, bookmark)}>Save</button>
+                </div>
+              ) : (
+                <div>
+                  <a href={bookmark.url} target="_blank">
+                    {bookmark.title}
+                  </a>
+                  <button onClick={() => handleEdit(index)}>Edit</button>
+                  <button onClick={() => handleDelete(index)}>Delete</button>
+                </div>
+              )}
             </li>
           ))}
         </ul>
