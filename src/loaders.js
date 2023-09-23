@@ -1,6 +1,7 @@
 const URL = 'https://five23-bookmarked-backened.onrender.com/'
 
 // BOOKMARK LOADER
+
 export const bookmarkLoader = async () => {
   const response = await fetch(URL+'/bookmark')
   const bookmark = await response.json()
