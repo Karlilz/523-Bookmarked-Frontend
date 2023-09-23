@@ -29,10 +29,6 @@ const Index = () => {
     }
   };
 
-  // const handleEdit = (index) => {
-  //   setEditIndex(index);
-  // };
-
   const handleSave = (index, editedBookmark) => {
     const updatedBookmarks = [...bookmarks];
     updatedBookmarks[index] = editedBookmark;
@@ -40,6 +36,7 @@ const Index = () => {
     setEditIndex(null);
   };
 
+  // STILL NEED TO DELETE FROM BACKEND
   // const handleDelete = (index) => {
   //   const updatedBookmarks = bookmarks.filter((_, i) => i !== index);
   //   setBookmarks(updatedBookmarks);
@@ -113,11 +110,11 @@ const Index = () => {
                   <a href={bookmark.url} target="_blank">
                     {bookmark.title}
                   </a>
-                  {/* <button onClick={() => handleEdit(index)}>Edit</button>
-                  <button onClick={() => handleDelete(index)}>Delete</button> */}
+                  {/* <button onClick={() => handleDelete(index)}>Delete</button> */}
                     <Form action={`/delete/${bookmark._id}`} method='POST'>
-      <button type='submit' className="bg-pink-300 rounded-full" value='delete bookmark'> Delete Bookmark </button>
-    </Form>
+                      <button type='submit' className="bg-pink-300 rounded-full" value='delete bookmark'> Delete Bookmark </button>
+                    {/* USE COMMAND LIKE FETCH - hanldeDELETE - to updateState - update frontend*/}
+                    </Form>
 
     <Link to={`/${bookmark._id}/edit`}>
         <button type="submit" className="bg-pink-300 rounded-full">
