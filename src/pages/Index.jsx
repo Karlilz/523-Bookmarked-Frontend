@@ -1,7 +1,7 @@
 import React, { useState,Form } from 'react';
 
 const Index = () => {
-  const [formData, setFormData] = useState({ name: '', link: '' });
+  const [formData, setFormData] = useState({ title: '', url: '' });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +17,7 @@ const Index = () => {
       <h3 style={{ textDecoration: 'underline', fontSize:'25px'}}>Bookmark a Helpful Coding Website</h3>
       <Form onSubmit={handleSubmit}>
         <input
-          type="text" name="name" placeholder="Website Name" value={formData.name} onChange={handleChange}
+          type="text" name="title" placeholder="Website Name" value={formData.name} onChange={handleChange}
           style={{
             width: '15%',
             padding: '10px',
@@ -29,7 +29,7 @@ const Index = () => {
           }}
         />
         <input
-          type="text" name="link" placeholder="http://" value={formData.link} onChange={handleChange}
+          type="text" name="url" placeholder="http://" value={formData.link} onChange={handleChange}
           style={{
             width: '15%',
             padding: '10px',
