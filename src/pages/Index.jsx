@@ -82,7 +82,7 @@ const Index = () => {
               ) : (
                 <div>
                   <a href={bookmark.url} target="_blank">
-                    {bookmark.title}
+                    {bookmark.title} {bookmark.url}
                   </a>
                   <button onClick={() => handleEdit(index)}>Edit</button>
                   <button onClick={() => handleDelete(index)}>Delete</button>
