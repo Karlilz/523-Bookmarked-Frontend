@@ -22,16 +22,7 @@ const Index = () => {
           style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
         <input
           type="text" name="link" placeholder="http://" value={formData.link} onChange={handleChange}
-          style={{
-            width: '15%',
-            padding: '10px',
-            marginBottom: '15px',
-            border: '1px solid #ccc',
-            borderRadius: '5px',
-            fontSize: '16px',
-            color: '#333',
-          }}
-        />
+          style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
         <input
           type="submit" value="Add Bookmark!"
           style={{width: '15%', padding: '10px', backgroundColor: '#71b8e4', color: 'black', border: 'none', borderRadius: '5px', fontSize: '16px'}}/>

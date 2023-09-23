@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 
-const URL = 'https://five23-bookmarked-backened.onrender.com/'
+const URL = "https://five23-bookmarked-backened.onrender.com"
 
 
 // CREATE ACTION 
