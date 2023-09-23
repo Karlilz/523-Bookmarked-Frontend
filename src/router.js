@@ -8,9 +8,9 @@ import {createBrowserRouter, createRoutesFromElements, Route,} from "react-route
   
   const router = createBrowserRouter(
     createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path="" element={<Index />} loader={bookmarkLoader} />
-      <Route path=":id" element={<Show />} loader={showLoader}/>
+    <Route path="/" element={<App/>}>
+      <Route path="" element={<Index/>} loader={bookmarkLoader} />
+      <Route path=":id" element={<Show/>} loader={showLoader}/>
       <Route path=":id/edit" element={<Update/>} loader={showLoader}/>
       <Route path="create" action={createAction}/>
       <Route path="update/:id" action={updateAction}/>
