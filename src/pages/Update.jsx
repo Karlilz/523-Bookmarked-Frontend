@@ -1,25 +1,53 @@
-// import React, { useState } from 'react';
-// import { useLoaderData } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLoaderData, Form } from 'react-router-dom'
 
-// const Update = () => {
-//   const bookmark = useLoaderData();
-//   const [formData, setFormData] = useState(bookmark);
+const Update = () => {
+    const data = useLoaderData()
+    const bookmark = useLoaderData()
+    const [formData, setFormData] = useState(bookmark);
+    const [bookmarks, setBookmarks] = useState(data);
 
-//   const handleChange = (e) => {
-//     setFormData(prevState => {
-//         return {...prevState, [e.target.name] : e.target.value}
-//     })
-//   }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+console.log(bookmark)
+    try {
+      const response = await fetch(`https://five23-bookmarked-backened.onrender.com/bookmark/update/${bookmark._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
-//   return (
-//     <div>
-//       <form action={`/update/${bookmark._id}`} method='post'>
-//         <input type="text" name="title" value={formData.title} onChange={handleChange} placeholder='Enter Webiste'/>
-//         <input type="text" name="url" value={formData.url} onChange={handleChange} placeholder='Enter URL'/>
-//         <input className="rounded-full p-2 bg-blue-200" type="submit" value={`Update ${bookmark.title}`}/>
-//       </form>
-//     </div>
-//   );
-// }
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    setFormData(prevState => {
+        return {...prevState, [event.target.name] : event.target.value}
+    })
+  };
 
-// export default Update;
+  return (
+    <div>
+        <div>
+      <h3 style={{ textDecoration: 'underline', fontSize:'25px', fontStyle:'italic'}}>Bookmark a Helpful Coding Website</h3>
+      <Form onSubmit={handleSubmit}>
+        <input
+          type="text" name="title" placeholder="Website Name" value={formData.title} onChange={handleChange}
+          style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
+        <input
+          type="text" name="url" placeholder="http://" value={formData.url} onChange={handleChange}
+          style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
+        <input
+          type="submit" value="Update Bookmark!"
+          style={{width: '15%', padding: '10px', backgroundColor: '#71b8e4', color: 'black', border: 'none', borderRadius: '5px', fontSize: '16px'}}/>
+      </Form>
+    </div>
+    </div>
+  )
+}
+
+export default Update
