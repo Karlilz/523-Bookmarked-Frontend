@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Form } from 'react-router-dom';
+import { Form, Link, useLoaderData} from 'react-router-dom';
 
 const Index = () => {
+  const data = useLoaderData()
   const [formData, setFormData] = useState({ title: '', url: '' });
-  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarks, setBookmarks] = useState(data);
   const [editIndex, setEditIndex] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -28,9 +29,9 @@ const Index = () => {
     }
   };
 
-  const handleEdit = (index) => {
-    setEditIndex(index);
-  };
+  // const handleEdit = (index) => {
+  //   setEditIndex(index);
+  // };
 
   const handleSave = (index, editedBookmark) => {
     const updatedBookmarks = [...bookmarks];
@@ -39,10 +40,10 @@ const Index = () => {
     setEditIndex(null);
   };
 
-  const handleDelete = (index) => {
-    const updatedBookmarks = bookmarks.filter((_, i) => i !== index);
-    setBookmarks(updatedBookmarks);
-  };
+  // const handleDelete = (index) => {
+  //   const updatedBookmarks = bookmarks.filter((_, i) => i !== index);
+  //   setBookmarks(updatedBookmarks);
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -84,8 +85,17 @@ const Index = () => {
                   <a href={bookmark.url} target="_blank">
                     {bookmark.title}
                   </a>
-                  <button onClick={() => handleEdit(index)}>Edit</button>
-                  <button onClick={() => handleDelete(index)}>Delete</button>
+                  {/* <button onClick={() => handleEdit(index)}>Edit</button>
+                  <button onClick={() => handleDelete(index)}>Delete</button> */}
+                    <Form action={`/delete/${bookmark._id}`} method='POST'>
+      <button type='submit' className="bg-pink-300 rounded-full" value='delete bookmark'> Delete Bookmark </button>
+    </Form>
+
+    <Link to={`/${bookmark._id}/edit`}>
+        <button type="submit" className="bg-pink-300 rounded-full">
+            Edit {bookmark.title}
+        </button>
+    </Link>
                 </div>
               )}
             </li>
