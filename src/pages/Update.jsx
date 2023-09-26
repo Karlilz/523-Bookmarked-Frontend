@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLoaderData, Form } from 'react-router-dom'
+import { useLoaderData, Form } from 'react-router-dom';
 
 const Update = () => {
     const data = useLoaderData()

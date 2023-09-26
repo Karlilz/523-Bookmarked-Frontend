@@ -41,6 +41,24 @@ const Index = () => {
   //   const updatedBookmarks = bookmarks.filter((_, i) => i !== index);
   //   setBookmarks(updatedBookmarks);
   // };
+  const handleDelete = async (bookmarkId) => {
+    try {
+      const response = await fetch(`https://five23-bookmarked-backened.onrender.com/bookmark/${bookmarkId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        // Remove the deleted bookmark from the frontend state
+        const updatedBookmarks = bookmarks.filter((bookmark) => bookmark._id !== bookmarkId);
+        setBookmarks(updatedBookmarks);
+      }
+    } catch (error) {
+      console.error('Error deleting bookmark:', error);
+    }
+  };
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
