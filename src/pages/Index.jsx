@@ -9,7 +9,6 @@ const Index = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch('https://five23-bookmarked-backened.onrender.com/bookmark', {
         method: 'POST',
@@ -18,7 +17,6 @@ const Index = () => {
         },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         const data = await response.json();
         setBookmarks([...bookmarks, data]);
@@ -41,7 +39,6 @@ const Index = () => {
       const response = await fetch(`https://five23-bookmarked-backened.onrender.com/bookmark/${bookmarkId}`, {
         method: 'DELETE',
       });
-
       if (response.ok) {
         const updatedBookmarks = bookmarks.filter((bookmark) => bookmark._id !== bookmarkId);
         setBookmarks(updatedBookmarks);
@@ -91,9 +88,7 @@ const Index = () => {
                 </div>
               ) : (
                 <div>
-                  <a href={bookmark.url} target="_blank">
-                    {bookmark.title}
-                  </a>
+                  <a href={bookmark.url} target="_blank">{bookmark.title}</a>
 
                   <button onClick={() => handleDelete(bookmark._id)}>Delete</button>
 
