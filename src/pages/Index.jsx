@@ -1,129 +1,11 @@
-// import React, { useState } from 'react';
-// import { Form, Link, useLoaderData} from 'react-router-dom';
-
-// const Index = () => {
-//   const data = useLoaderData()
-//   const [formData, setFormData] = useState({ title: '', url: '' });
-//   const [bookmarks, setBookmarks] = useState(data);
-//   const [editIndex, setEditIndex] = useState(null);
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     try {
-//       const response = await fetch('https://five23-bookmarked-backened.onrender.com/bookmark', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(formData),
-//       });
-
-//       if (response.ok) {
-//         const data = await response.json();
-//         setBookmarks([...bookmarks, data]);
-//         setFormData({ title: '', url: '' });
-//       }
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   };
-
-//   const handleSave = (index, editedBookmark) => {
-//     const updatedBookmarks = [...bookmarks];
-//     updatedBookmarks[index] = editedBookmark;
-//     setBookmarks(updatedBookmarks);
-//     setEditIndex(null);
-//   };
-
-//   const handleDelete = async (bookmarkId) => {
-//       try {
-//         const response = await fetch(`https://five23-bookmarked-backened.onrender.com/bookmark/${bookmarkId}`, {
-//           method: 'DELETE',
-//         });
-  
-//         if (response.ok) {
-//           const updatedBookmarks = bookmarks.filter((bookmark) => bookmark._id !== bookmarkId);
-//           setBookmarks(updatedBookmarks);
-//         } else {
-//           console.error('Error deleting bookmark:', response.statusText);
-//         }
-//       } catch (error) {
-//         console.error('Error deleting bookmark:', error);
-//       }
-//     }
-//   };
-  
-
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   return (
-//     <div>
-//       <h3 style={{ textDecoration: 'underline', fontSize: '25px'}}>
-//         Bookmark a Helpful Coding Website
-//       </h3>
-//       <Form onSubmit={handleSubmit}>
-//         <input type="text" name="title" placeholder="Website Name" value={formData.title} onChange={handleChange}
-//           style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px',fontSize: '16px', color: '#333'}}/>
-
-//         <input type="text" name="url" placeholder="http://" value={formData.url} onChange={handleChange}
-//           style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
-
-//         <input type="submit" value="Add Bookmark!"
-//           style={{width: '15%', padding: '10px', backgroundColor: '#71b8e4', color: 'black', border: 'none',borderRadius: '5px', fontSize: '16px'}}/>
-//       </Form>
-
-//       <div>
-//         <ul style={{ listStyleType: 'none', padding: 0, fontSize: '25px' }}>
-//           {bookmarks.map((bookmark, index) => (
-//             <li key={index}>
-//               {editIndex === index ? (
-//                 <div>
-//                   <input type="text" name="title" value={bookmark.title} onChange={(e) =>
-//                       handleSave(index, { ...bookmark, title: e.target.value })}/>
-
-//                   <input type="text" name="url" value={bookmark.url} onChange={(e) =>
-//                       handleSave(index, { ...bookmark, url: e.target.value })}/>
-                      
-//                   <button onClick={() => handleSave(index, bookmark)}>Save</button>
-//                 </div>
-//               ) : (
-//                 <div>
-//                   <a href={bookmark.url} target="_blank">
-//                     {bookmark.title}
-//                   </a>
-
-//     <Link to={`/${bookmark._id}/edit`}>
-//         <button type="submit" className="bg-pink-300 rounded-full">
-//             Edit {bookmark.title}
-//         </button>
-//     </Link>
-//                 </div>
-//               )}
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     </div>
-//   );
-
-
-// export default Index;
-
-
-
 import React, { useState } from 'react';
-import { Form, Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { Form, Link, useLoaderData } from 'react-router-dom';
 
 const Index = () => {
   const data = useLoaderData();
   const [formData, setFormData] = useState({ title: '', url: '' });
   const [bookmarks, setBookmarks] = useState(data);
   const [editIndex, setEditIndex] = useState(null);
-  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -135,7 +17,6 @@ const Index = () => {
         },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         const data = await response.json();
         setBookmarks([...bookmarks, data]);
@@ -151,7 +32,6 @@ const Index = () => {
     updatedBookmarks[index] = editedBookmark;
     setBookmarks(updatedBookmarks);
     setEditIndex(null);
-    navigate('/');
   };
 
   const handleDelete = async (bookmarkId) => {
@@ -159,7 +39,6 @@ const Index = () => {
       const response = await fetch(`https://five23-bookmarked-backened.onrender.com/bookmark/${bookmarkId}`, {
         method: 'DELETE',
       });
-
       if (response.ok) {
         const updatedBookmarks = bookmarks.filter((bookmark) => bookmark._id !== bookmarkId);
         setBookmarks(updatedBookmarks);
@@ -177,28 +56,26 @@ const Index = () => {
   };
   return (
     <div>
-      <h3 style={{ textDecoration: 'underline', fontSize: '25px' }}>
-        Bookmark a Helpful Coding Website
-      </h3>
+      <h3 style={{ textDecoration: 'underline', fontSize: '25px' }}>Bookmark a Helpful Coding Website</h3>
 
       <Form onSubmit={handleSubmit}>
         <input type="text" name="title" placeholder="Website Name" value={formData.title} onChange={handleChange}
           style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
-
+ 
         <input type="text" name="url" placeholder="http://" value={formData.url} onChange={handleChange}
-          style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px',color: '#333'}}/>
+          style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
 
         <input type="submit" value="Add Bookmark!"
-          style={{width: '15%', padding: '10px', backgroundColor: '#71b8e4', color: 'black', border: 'none', borderRadius: '5px',fontSize: '16px'}}/>
+          style={{width: '15%', padding: '10px', backgroundColor: '#71b8e4', color: 'black', border: 'none', borderRadius: '5px', fontSize: '16px'}}/>
       </Form>
+
       <div>
-        
         <ul style={{ listStyleType: 'none', padding: 0, fontSize: '25px' }}>
           {bookmarks.map((bookmark, index) => (
             <li key={index}>
               {editIndex === index ? (
                 <div>
-                  <input type="text" name="title"value={bookmark.title}
+                  <input type="text" name="title" value={bookmark.title}
                     onChange={(e) =>
                       handleSave(index, { ...bookmark, title: e.target.value})}/>
 
@@ -210,12 +87,12 @@ const Index = () => {
                 </div>
               ) : (
                 <div>
-                  <a href={bookmark.url} target="_blank">
-                    {bookmark.title}
-                  </a>
+                  <a href={bookmark.url} target="_blank">{bookmark.title}</a>
+
+                  <button onClick={() => handleDelete(bookmark._id)}>Delete</button>
 
                   <Link to={`/${bookmark._id}/edit`}>
-                    <button type="submit" className="bg-pink-300 rounded-full"> Edit {bookmark.title}</button>
+                    <button type="submit" className="bg-pink-300 rounded-full">Edit</button>
                   </Link>
                 </div>
               )}
