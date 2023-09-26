@@ -9,6 +9,7 @@ const Index = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const response = await fetch('https://five23-bookmarked-backened.onrender.com/bookmark', {
         method: 'POST',
@@ -17,6 +18,7 @@ const Index = () => {
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
         const data = await response.json();
         setBookmarks([...bookmarks, data]);
@@ -39,6 +41,7 @@ const Index = () => {
       const response = await fetch(`https://five23-bookmarked-backened.onrender.com/bookmark/${bookmarkId}`, {
         method: 'DELETE',
       });
+
       if (response.ok) {
         const updatedBookmarks = bookmarks.filter((bookmark) => bookmark._id !== bookmarkId);
         setBookmarks(updatedBookmarks);
@@ -54,6 +57,7 @@ const Index = () => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+
   return (
     <div>
       <h3 style={{ textDecoration: 'underline', fontSize: '25px' }}>Bookmark a Helpful Coding Website</h3>
@@ -61,7 +65,7 @@ const Index = () => {
       <Form onSubmit={handleSubmit}>
         <input type="text" name="title" placeholder="Website Name" value={formData.title} onChange={handleChange}
           style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
- 
+
         <input type="text" name="url" placeholder="http://" value={formData.url} onChange={handleChange}
           style={{width: '15%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px', color: '#333'}}/>
 
@@ -77,17 +81,19 @@ const Index = () => {
                 <div>
                   <input type="text" name="title" value={bookmark.title}
                     onChange={(e) =>
-                      handleSave(index, { ...bookmark, title: e.target.value})}/>
+                      handleSave(index, { ...bookmark, title: e.target.value })}/>
 
                   <input type="text" name="url" value={bookmark.url}
                     onChange={(e) =>
-                      handleSave(index, { ...bookmark, url: e.target.value})}/>
+                      handleSave(index, { ...bookmark, url: e.target.value })}/>
 
                   <button onClick={() => handleSave(index, bookmark)}>Save</button>
                 </div>
               ) : (
                 <div>
-                  <a href={bookmark.url} target="_blank">{bookmark.title}</a>
+                  <a href={bookmark.url} target="_blank">
+                    {bookmark.title}
+                  </a>
 
                   <button onClick={() => handleDelete(bookmark._id)}>Delete</button>
 
