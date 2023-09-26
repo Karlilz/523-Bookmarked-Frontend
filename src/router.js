@@ -3,13 +3,14 @@ import {createBrowserRouter, createRoutesFromElements, Route,} from "react-route
   import Index from "./pages/Index"
   import Show from "./pages/Show"
   import Update from "./pages/Update"
+  import Header from "./components/Header"
   import { createAction,deleteAction, updateAction } from "./action"
   import { bookmarkLoader, showLoader } from "./loaders"
   
   const router = createBrowserRouter(
     createRoutesFromElements(
     <Route path="/" element={<App/>}>
-      <Route path="" element={<Index/>} loader={bookmarkLoader} />
+      <Route path="" element={<Index/>} component={Header} loader={bookmarkLoader} />
       <Route path=":id" element={<Show/>} loader={showLoader}/>
       <Route path=":id/edit" element={<Update/>} loader={showLoader}/>
       <Route path="create" action={createAction}/>
